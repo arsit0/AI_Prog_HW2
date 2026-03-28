@@ -2,8 +2,6 @@ from exam_system import ExamSystem
 #非人机
 
 
-
-
 def main():
     # 创建系统对象，程序启动时自动读取学生名单文件
     system = ExamSystem("人工智能编程语言学生名单.txt")
@@ -17,6 +15,7 @@ def main():
         print("\n===== 学生信息与考场管理系统 =====")
         print("1. 按学号查找学生信息")
         print("2. 随机点名")
+        print("3. 生成考场安排表")
         print("0. 退出系统")
 
         choice = input("请输入功能编号：").strip()
@@ -50,6 +49,13 @@ def main():
 
             except ValueError as e:
                 print(f"输入错误：{e}")
+
+        elif choice == "3":
+            try:
+                output_path = system.generate_exam_arrangement()
+                print(f"考场安排表已生成：{output_path}")
+            except Exception as e:
+                print(f"生成考场安排表失败：{e}")
 
         elif choice == "0":
             print("系统已退出。")
