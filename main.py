@@ -1,6 +1,9 @@
 from exam_system import ExamSystem
 #非人机
 
+
+
+
 def main():
     # 创建系统对象，程序启动时自动读取学生名单文件
     system = ExamSystem("人工智能编程语言学生名单.txt")
@@ -13,6 +16,7 @@ def main():
     while True:
         print("\n===== 学生信息与考场管理系统 =====")
         print("1. 按学号查找学生信息")
+        print("2. 随机点名")
         print("0. 退出系统")
 
         choice = input("请输入功能编号：").strip()
@@ -30,6 +34,22 @@ def main():
                 print(student)
             else:
                 print("未找到该学号对应的学生信息，请检查后重新输入。")
+
+        elif choice == "2":
+            try:
+                # 输入要随机点名的人数，并尝试转换为整数
+                count = int(input("请输入要随机点名的人数：").strip())
+
+                # 调用系统方法进行随机点名
+                selected_students = system.random_call(count)
+
+                print("\n随机点名结果：")
+                for index, student in enumerate(selected_students, start=1):
+                    print(f"\n第{index}位：")
+                    print(student)
+
+            except ValueError as e:
+                print(f"输入错误：{e}")
 
         elif choice == "0":
             print("系统已退出。")
