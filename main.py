@@ -2,6 +2,7 @@ from exam_system import ExamSystem
 #非人机
 
 
+
 def main():
     # 创建系统对象，程序启动时自动读取学生名单文件
     system = ExamSystem("人工智能编程语言学生名单.txt")
@@ -16,18 +17,15 @@ def main():
         print("1. 按学号查找学生信息")
         print("2. 随机点名")
         print("3. 生成考场安排表")
+        print("4. 生成准考证文件")
         print("0. 退出系统")
 
         choice = input("请输入功能编号：").strip()
 
         if choice == "1":
-            # 输入要查询的学号
             student_id = input("请输入要查找的学号：").strip()
-
-            # 调用系统方法查找学生
             student = system.find_student_by_id(student_id)
 
-            # 判断是否找到
             if student:
                 print("\n查询结果：")
                 print(student)
@@ -36,10 +34,7 @@ def main():
 
         elif choice == "2":
             try:
-                # 输入要随机点名的人数，并尝试转换为整数
                 count = int(input("请输入要随机点名的人数：").strip())
-
-                # 调用系统方法进行随机点名
                 selected_students = system.random_call(count)
 
                 print("\n随机点名结果：")
@@ -56,6 +51,13 @@ def main():
                 print(f"考场安排表已生成：{output_path}")
             except Exception as e:
                 print(f"生成考场安排表失败：{e}")
+
+        elif choice == "4":
+            try:
+                ticket_dir = system.generate_admission_tickets()
+                print(f"准考证文件已生成：{ticket_dir}")
+            except Exception as e:
+                print(f"生成准考证失败：{e}")
 
         elif choice == "0":
             print("系统已退出。")
